@@ -25,13 +25,13 @@ async function getIngredient(id) {
     const auth = await google.auth.getClient({
         scopes: ['https://www.googleapis.com/auth/spreadsheets']
     });
-    const api = google.sheets({version: 'v4', auth});
+    const api = google.sheets({ version: 'v4', auth });
     const response = await api.spreadsheets.values.get({
         spreadsheetId: process.env.SHEET_ID,
         range: `${process.env.TAB_ID}!A:E`
     });
-    for(let row of response.data.values) {
-        if(row[0] == id) {
+    for (let row of response.data.values) {
+        if (row[0] == id) {
             return {
                 id: row[0],
                 name: row[1],
